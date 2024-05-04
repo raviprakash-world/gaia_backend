@@ -1,0 +1,9 @@
+{
+  "name": "mail.treleva.org",
+  "host": "treleva.org",
+  "secure": true,
+  "auth": {
+    "user": "admin@treleva.org",
+    "pass": "M@n1v@velert"
+  }
+}
