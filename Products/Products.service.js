@@ -7,24 +7,34 @@ const multer = require("multer");
 const path = require("path");
 const fileUploadCheck = require("_middleware/file-upload-check");
 const { log } = require("console");
+const { DATE, QueryTypes } = require("sequelize");
 
 async function getAll() {
-  const getAllBrand = await db.Brand.findAll();
-  // getAllUser.forEach((user) => {
-  //   user.role = user.role.split(",");
+  // const products = await db.Products.findAll({
+  //   include: {
+  //     model: db.Brand,
+  //     as: "ProductBrand",
+  //   },
   // });
-  return getAllBrand;
+  const products = await db.sequelize.query(
+    `SELECT p.*, b.*, f.*
+    FROM products p
+    JOIN brands b ON p.brand_id = b.brand_id
+    JOIN fregnances f ON p.Fregnance_id = f.Fregnance_id`,
+    {
+      type: QueryTypes.SELECT,
+    }
+  );
+
+  return products;
 }
 
 async function create(req) {
-  console.log("req", req.body);
-  console.log("req.file", req.file);
-
   if (req.fileValidationError) {
     throw new Error(req.fileValidationError);
   }
   const {
-    name,
+    product_name,
     brand_id,
     Fregnance_id,
     description,
@@ -37,7 +47,7 @@ async function create(req) {
   } = req.body;
 
   if (
-    !name ||
+    !product_name ||
     !brand_id ||
     !Fregnance_id ||
     !description ||
@@ -54,7 +64,7 @@ async function create(req) {
     throw { message: "Missing required main image", statusCode: 404 };
   }
   const product = await db.Products.create({
-    name,
+    product_name,
     brand_id,
     Fregnance_id,
     description,
@@ -67,7 +77,7 @@ async function create(req) {
   });
 
   return {
-    name,
+    product_name,
     brand_id,
     Fregnance_id,
     description,

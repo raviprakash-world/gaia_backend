@@ -15,7 +15,7 @@ function model(sequelize) {
       primaryKey: true,
       defaultValue: generateId,
     },
-    name: {
+    brand_name: {
       type: DataTypes.STRING,
       allowNull: false,
     },

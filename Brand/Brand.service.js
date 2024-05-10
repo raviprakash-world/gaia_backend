@@ -22,11 +22,11 @@ async function create(req) {
   if (req.fileValidationError) {
     throw new Error(req.fileValidationError);
   }
-  const { name, country, description, website } = req.body;
+  const { brand_name, country, description, website } = req.body;
   const logo = req.file ? req.file.filename : null;
   console.log("logo", logo);
   const newBrand = await db.Brand.create({
-    name,
+    brand_name,
     country,
     description,
     logo,

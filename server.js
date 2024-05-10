@@ -76,17 +76,17 @@ app.get("*", (req, res) => {
 // global error handler
 app.use(errorHandler);
 
-cron.schedule(process.env.CRON_SCHEDULE, () => {
-  console.log("Running the transaction check cron job...");
-  (async function () {
-    try {
-      await transactionsCheck();
-      console.log("Transaction check complete");
-    } catch (e) {
-      console.error("Transaction check error: ", e);
-    }
-  })();
-});
+// cron.schedule(process.env.CRON_SCHEDULE, () => {
+//   console.log("Running the transaction check cron job...");
+//   (async function () {
+//     try {
+//       await transactionsCheck();
+//       console.log("Transaction check complete");
+//     } catch (e) {
+//       console.error("Transaction check error: ", e);
+//     }
+//   })();
+// });
 
 // start server
 const port =
