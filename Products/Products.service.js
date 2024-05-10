@@ -19,21 +19,65 @@ async function getAll() {
 async function create(req) {
   console.log("req", req.body);
   console.log("req.file", req.file);
+
   if (req.fileValidationError) {
     throw new Error(req.fileValidationError);
   }
-  const { name, country, description, website } = req.body;
-  const logo = req.file ? req.file.filename : null;
-  console.log("logo", logo);
-  const newBrand = await db.Brand.create({
+  const {
     name,
-    country,
+    brand_id,
+    Fregnance_id,
     description,
-    logo,
-    website,
+    gender,
+    size,
+    price,
+    discount_price,
+    stock_quantity,
+    image_id,
+  } = req.body;
+
+  if (
+    !name ||
+    !brand_id ||
+    !Fregnance_id ||
+    !description ||
+    !gender ||
+    !size ||
+    !price ||
+    !discount_price ||
+    !stock_quantity
+  ) {
+    throw { message: "Missing required fields", statusCode: 404 };
+  }
+  const main_image = req.file ? req.file.filename : "";
+  if (!main_image) {
+    throw { message: "Missing required main image", statusCode: 404 };
+  }
+  const product = await db.Products.create({
+    name,
+    brand_id,
+    Fregnance_id,
+    description,
+    gender,
+    size,
+    price,
+    discount_price,
+    stock_quantity,
+    main_image,
   });
 
-  return newBrand;
+  return {
+    name,
+    brand_id,
+    Fregnance_id,
+    description,
+    gender,
+    size,
+    price,
+    discount_price,
+    stock_quantity,
+    image_id,
+  };
 }
 
 async function update(id, req) {

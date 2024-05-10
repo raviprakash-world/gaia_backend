@@ -64,6 +64,7 @@ app.use("/role", require("./roleTable/role.controller"));
 app.use("/category", require("./Category/Category.controller"));
 app.use("/fregnance", require("./FregnanceFamily/Fregnance.controller"));
 app.use("/brand", require("./Brand/Brand.controller"));
+app.use("/products", require("./Products/Products.controller"));
 
 app.use("/color", require("./Color/Color.controller"));
 

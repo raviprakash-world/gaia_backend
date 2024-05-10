@@ -4,7 +4,7 @@ module.exports = model;
 
 function generateId() {
   // Generates a random number between 10000 and 99999
-  return `BRAND-${Math.floor(100000 + Math.random() * 900000)}`;
+  return `PROD-${Math.floor(100000 + Math.random() * 900000)}`;
 }
 
 function model(sequelize) {
@@ -20,52 +20,61 @@ function model(sequelize) {
       allowNull: false,
     },
     brand_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
       references: {
-        model: "Brand",
+        model: "Brands",
         key: "brand_id",
       },
     },
     Fregnance_id: {
       type: DataTypes.STRING,
       primaryKey: true,
+      allowNull: false,
       references: {
-        model: "Fregnance",
+        model: "Fregnances",
         key: "Fregnance_id",
       },
     },
     description: {
       type: DataTypes.TEXT,
+      allowNull: false,
     },
     gender: {
       type: DataTypes.ENUM("Men", "Women", "Unisex"),
+      allowNull: false,
     },
 
     size: {
       type: DataTypes.STRING(20),
+      allowNull: false,
     },
     price: {
       type: DataTypes.DECIMAL(10, 2),
+      allowNull: false,
     },
     discount_price: {
       type: DataTypes.DECIMAL(10, 2),
+      allowNull: false,
     },
     stock_quantity: {
       type: DataTypes.INTEGER,
+      allowNull: false,
     },
     main_image: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
-    additional_images: {
-      type: DataTypes.JSON,
+    image_id: {
+      type: DataTypes.STRING,
+      // allowNull: false,
     },
   };
 
   const options = {
     hooks: {
       beforeValidate(brand) {
-        if (!brand.brand_id || brand.brand_id.startsWith("BRAND-")) {
+        if (!brand.brand_id || brand.brand_id.startsWith("PROD-")) {
           brand.brand_id = generateId();
         }
       },
@@ -78,5 +87,5 @@ function model(sequelize) {
     },
   };
 
-  return sequelize.define("brand", attributes, options);
+  return sequelize.define("products", attributes, options);
 }

@@ -39,6 +39,7 @@ module.exports = db = {};
     db.Category = require("../Category/Category.model")(sequelize);
     db.Fregnance = require("../FregnanceFamily/Fregnance.model")(sequelize);
     db.Brand = require("../Brand/Brand.model")(sequelize);
+    db.Products = require("../Products/Products.model")(sequelize);
 
     // sync all models with database
     await sequelize.sync();

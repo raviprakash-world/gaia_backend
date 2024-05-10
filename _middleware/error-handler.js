@@ -4,7 +4,7 @@ function errorHandler(err, req, res, next) {
   console.log(typeof err);
   switch (true) {
     case typeof err === "string":
-      console.log(err);
+      console.log("error handler", err);
       // custom application error
       const is404 = err.toLowerCase().endsWith("not found");
       const is401 = err === "Authorization Failed";
@@ -19,6 +19,6 @@ function errorHandler(err, req, res, next) {
     default:
       return res
         .status(500)
-        .json({ message: err.message, role: err.role, code: res.statusCode });
+        .json({ message: err.message, role: err.role, code: err.statusCode });
   }
 }
