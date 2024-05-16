@@ -10,15 +10,9 @@ const { log } = require("console");
 const { DATE, QueryTypes } = require("sequelize");
 
 async function getAll() {
-  // const products = await db.Products.findAll({
-  //   include: {
-  //     model: db.Brand,
-  //     as: "ProductBrand",
-  //   },
-  // });
   const products = await db.sequelize.query(
     `SELECT p.*, b.*, f.*
-    FROM products p
+    FROM Products p
     JOIN brands b ON p.brand_id = b.brand_id
     JOIN fregnances f ON p.Fregnance_id = f.Fregnance_id`,
     {

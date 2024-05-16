@@ -59,12 +59,12 @@ app.use(
 );
 
 // api routes
-app.use("/login", require("./auth/auth.controller"));
-app.use("/role", require("./roleTable/role.controller"));
-app.use("/category", require("./Category/Category.controller"));
-app.use("/fregnance", require("./FregnanceFamily/Fregnance.controller"));
-app.use("/brand", require("./Brand/Brand.controller"));
-app.use("/products", require("./Products/Products.controller"));
+app.use("/api/login", require("./auth/auth.controller"));
+app.use("/api/role", require("./roleTable/role.controller"));
+app.use("/api/category", require("./Category/Category.controller"));
+app.use("/api/fregnance", require("./FregnanceFamily/Fregnance.controller"));
+app.use("/api/brand", require("./Brand/Brand.controller"));
+app.use("/api/products", require("./Products/Products.controller"));
 
 app.use("/color", require("./Color/Color.controller"));
 
@@ -75,18 +75,6 @@ app.get("*", (req, res) => {
 
 // global error handler
 app.use(errorHandler);
-
-// cron.schedule(process.env.CRON_SCHEDULE, () => {
-//   console.log("Running the transaction check cron job...");
-//   (async function () {
-//     try {
-//       await transactionsCheck();
-//       console.log("Transaction check complete");
-//     } catch (e) {
-//       console.error("Transaction check error: ", e);
-//     }
-//   })();
-// });
 
 // start server
 const port =
