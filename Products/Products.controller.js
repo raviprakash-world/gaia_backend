@@ -8,7 +8,7 @@ const authHandler = require("../_middleware/auth-handler");
 
 // routes
 
-// router.get("/", authUser);
+router.get("/", getById);
 router.get(
   "/",
   // authHandler("readAny", "authResource"),
@@ -38,6 +38,12 @@ module.exports = router;
 
 // route functions
 
+function getById(req, res, next) {
+  productsService
+    .getById(req.params.id)
+    .then((users) => res.json(users))
+    .catch(next);
+}
 function getAll(req, res, next) {
   productsService
     .getAll()

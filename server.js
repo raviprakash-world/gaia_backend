@@ -23,9 +23,9 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 app.use(cors());
 
-app.use("/image", express.static("Transaction/Img/"));
-app.use("/file", express.static("Transaction/IndemnityForm/"));
-app.use("/billImage", express.static("BillRepository/Img/"));
+app.use("/image", express.static("uploads"));
+// app.use("/file", express.static("Transaction/IndemnityForm/"));
+// app.use("/billImage", express.static("BillRepository/Img/"));
 
 // serve static files from the "dist" directory
 app.use(express.static(path.join(__dirname, "dist")));
@@ -59,12 +59,12 @@ app.use(
 );
 
 // api routes
-app.use("/api/login", require("./auth/auth.controller"));
-app.use("/api/role", require("./roleTable/role.controller"));
-app.use("/api/category", require("./Category/Category.controller"));
-app.use("/api/fregnance", require("./FregnanceFamily/Fregnance.controller"));
-app.use("/api/brand", require("./Brand/Brand.controller"));
-app.use("/api/products", require("./Products/Products.controller"));
+app.use("/login", require("./auth/auth.controller"));
+app.use("/role", require("./roleTable/role.controller"));
+app.use("/category", require("./Category/Category.controller"));
+app.use("/fregnance", require("./FregnanceFamily/Fregnance.controller"));
+app.use("/brand", require("./Brand/Brand.controller"));
+app.use("/products", require("./Products/Products.controller"));
 
 app.use("/color", require("./Color/Color.controller"));
 

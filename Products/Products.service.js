@@ -9,6 +9,20 @@ const fileUploadCheck = require("_middleware/file-upload-check");
 const { log } = require("console");
 const { DATE, QueryTypes } = require("sequelize");
 
+async function getById(id) {
+  const products = await db.sequelize.query(
+    `SELECT p.*, b.*, f.*
+    FROM Products p
+    JOIN brands b ON p.brand_id = b.brand_id
+    JOIN fregnances f ON p.Fregnance_id = f.Fregnance_id
+    WHERE p.product_id = "${id}";`,
+    {
+      type: QueryTypes.SELECT,
+    }
+  );
+
+  return products;
+}
 async function getAll() {
   const products = await db.sequelize.query(
     `SELECT p.*, b.*, f.*
@@ -123,6 +137,7 @@ async function _delete(id) {
 }
 
 module.exports = {
+  getById,
   getAll,
   create,
   update,
